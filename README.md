@@ -1,4 +1,4 @@
-# Repository Name
+# ftl-code-demo-2024
 
 This repository contains in-class demo code and supplemental code for covered topics.
 
