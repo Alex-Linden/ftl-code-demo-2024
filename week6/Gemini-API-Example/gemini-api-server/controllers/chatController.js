@@ -37,28 +37,15 @@ const chatHandler = async (req, res) => {
 
     messages.push({ role: "user", content: prompt });
 
-    // interact with OpenAI API
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: messages,
-    });
-
-    // process the response - specific to OpenAI Api resoponse
-    const chatResponse = completion.choices[0].message.content.trim();
+    // get the model - WORKING WITH GEMINI API --------------------
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    //get the result from the model using the generateContent and passing in the prompt
+    const result = await model.generateContent(prompt);
+    const chatResponse = await result.response.text();
 
     //new conversation id and saave the chat message to DB
     const newConversationId = conversationId || Date.now().toString();
     await saveChatMessage(newConversationId, prompt, chatResponse);
-
-    // get the model - WORKING WITH GEMINI API --------------------
-    // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    // //get the result from the model using the generateContent and passing in the prompt
-    // const result = await model.generateContent(prompt);
-    // const chatResponse = await result.response.text();
-
-    // //new conversation id and saave the chat message to DB
-    // const newConversationId = conversationId || Date.now().toString();
-    // await saveChatMessage(newConversationId, prompt, chatResponse);
 
     // -------------------------------------------------------
 
