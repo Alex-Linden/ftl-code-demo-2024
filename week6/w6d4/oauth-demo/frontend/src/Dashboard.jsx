@@ -14,7 +14,8 @@ function Dashboard() {
     const { data } = await axios.get('http://localhost:3000/api/user', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-      }
+      },
+      withCredentials: true
     });
     setUser(data.user);
   }
