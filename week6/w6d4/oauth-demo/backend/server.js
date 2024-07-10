@@ -17,7 +17,7 @@ app.use(cors({
   }
 }));
 
-app.use(cookieParser());
+app.use(cookieParser(process.env.JWT_SECRET_KEY));
 
 app.use(session({
   secret: process.env.JWT_SECRET_KEY, 
@@ -75,8 +75,7 @@ app.get('/auth/github/callback', async (req, res) => {
 });
 
 app.get('/auth/session', (req, res) => {
-  const cookie = req.cookies['connect.sid'];
-  console.log(cookie)
+  console.log(req.signedCookies)
   
   if (req.session && req.session.githubToken) {
     res.json({ authenticated: true, accessToken: req.session.githubToken });
@@ -86,12 +85,12 @@ app.get('/auth/session', (req, res) => {
   }
 });
 
-app.get('/api/user', verifyToken, (req, res) => {
+app.get('/api/user', verifyUser, (req, res) => {
   res.json({ user: req.user.login });
 });
 
-// Middleware for verifying access tokens
-async function verifyToken(req, res, next) {
+// Middleware for verifying user
+async function verifyUser(req, res, next) {
   const bearerHeader = req.headers['authorization'];
   if (bearerHeader !== 'undefined') {
     const bearerToken = bearerHeader.split(' ')[1];
