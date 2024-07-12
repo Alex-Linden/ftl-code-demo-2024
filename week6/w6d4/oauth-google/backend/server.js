@@ -32,17 +32,17 @@ app.get("/auth/login", (req, res) => {
     ],
   });
 
-  console.log('redir')
   res.redirect(authorizationUrl);
 });
 
 app.get("/auth/google/callback", async (req, res) => {
   const code = req.query.code;
-
+   console.log(code)
   try {
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
     console.log(tokens)
+    // tokens.access_token
 
     const oauth2 = google.oauth2({
       auth: oauth2Client,
