@@ -17,7 +17,7 @@ const chatHandler = async (req, res) => {
     return res.status(400).send("Prompt is empty - it is required");
   }
 
-  // try to conenct to genAI - geminiAPI
+  // try to conenct to openAI API
   try {
     let messages = [
       { role: "system", content: "You are a helpful assistant." },
