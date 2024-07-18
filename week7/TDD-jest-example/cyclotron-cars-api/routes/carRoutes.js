@@ -8,7 +8,7 @@ router.get("/", carController.getAllCars);
 router.get("/:id", carController.getCarById);
 //add a new car
 router.post("/", carController.createCar);
-//create a new car
+//update an existing car
 router.put("/:id", carController.udpateCar);
 //delete a car
 router.delete("/:id", carController.deleteCar);
