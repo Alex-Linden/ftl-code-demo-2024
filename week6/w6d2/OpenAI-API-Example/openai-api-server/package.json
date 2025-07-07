@@ -12,13 +12,14 @@
   "description": "",
   "dependencies": {
     "@google/generative-ai": "^0.14.1",
-    "@prisma/client": "^5.16.2",
+    "@prisma/client": "^6.11.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-rate-limit": "^7.3.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.4",
-    "openai": "^4.52.4"
+    "openai": "^4.104.0",
+    "prisma": "^6.11.1"
   }
 }
